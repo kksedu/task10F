@@ -51,6 +51,6 @@ jobs:
           username: ${{ secrets.MAIL_USERNAME }}
           password: ${{ secrets.MAIL_PASSWORD }}
           subject: Powiadomienie o Wdrożeniu
-          body: Twoje aplikacje zostały pomyślnie wdrożone!
+          body: Twoje aplikacje zostały pomyślnie wdrożone !
           to: kamil.kaczmarczyk@student.uj.edu.pl
           from: GitHub Actions
