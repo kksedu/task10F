@@ -1,0 +1,56 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pobranie Kodu
+        uses: actions/checkout@v2
+
+      - name: Budowanie Obrazu Docker dla Frontendu
+        run: |
+          cd front-tsx
+          docker image build -t teatrocamillo/front-tsx:v0 .
+
+      - name: Wysyłanie Obrazu Docker Frontendu do DockerHub
+        run: |
+          echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
+          docker push teatrocamillo/front-tsx:v0
+
+  build-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pobranie Kodu
+        uses: actions/checkout@v2
+
+      - name: Budowanie Obrazu Docker dla Backend
+        run: |
+          cd task-echo
+          docker image build -t teatrocamillo/task-echo:v0 .
+
+      - name: Wysyłanie Obrazu Docker Backend do DockerHub
+        run: |
+          echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
+          docker push twoj-dockerhub-backend-image
+
+
+  notify:
+    needs: [build-frontend, build-backend]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wysłanie Powiadomienia E-mail
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: Powiadomienie o Wdrożeniu
+          body: Twoje aplikacje zostały pomyślnie wdrożone!
+          to: kamil.kaczmarczyk@student.uj.edu.pl
+          from: GitHub Actions
