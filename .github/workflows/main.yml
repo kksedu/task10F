@@ -36,7 +36,7 @@ jobs:
       - name: Wysyłanie Obrazu Docker Backend do DockerHub
         run: |
           echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
-          docker push twoj-dockerhub-backend-image
+          docker push teatrocamillo/task-echo:v0
 
 
   notify:
