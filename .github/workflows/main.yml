@@ -15,7 +15,7 @@ jobs:
       - name: Budowanie Obrazu Docker dla Frontendu
         run: |
           cd front-tsx
-          docker image build -t teatrocamillo/front-tsx:v0 .
+          docker image build --platform=linux/amd64 -t teatrocamillo/front-tsx:v0 .
 
       - name: Wysyłanie Obrazu Docker Frontendu do DockerHub
         run: |
