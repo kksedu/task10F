@@ -52,5 +52,5 @@ jobs:
           password: ${{ secrets.MAIL_PASSWORD }}
           subject: Powiadomienie o Wdrożeniu
           body: Twoje aplikacje zostały pomyślnie wdrożone !
-          to: kamil.kaczmarczyk@student.uj.edu.pl
+          to: teatrocamillo@gmail.com
           from: GitHub Actions
