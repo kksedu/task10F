@@ -21,7 +21,7 @@ jobs:
         run: |
           echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
           docker push teatrocamillo/front-tsx:v0
-          
+
   build-backend:
     runs-on: ubuntu-latest
     steps:
@@ -37,3 +37,19 @@ jobs:
         run: |
           echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
           docker push teatrocamillo/task-echo:v0
+          
+  notify:
+    needs: [build-frontend, build-backend]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wysłanie Powiadomienia E-mail
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: Powiadomienie o Wdrożeniu
+          body: Twoje aplikacje zostały pomyślnie wdrożone !
+          to: teatrocamillo@gmail.com
+          from: GitHub Actions

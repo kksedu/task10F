@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8080';
+//const API_URL = 'http://localhost:8080';
+const API_URL = 'https://task-echo-frad2spata-uc.a.run.app';
 
 export const fetchProducts = async () => {
   try {
