@@ -11,7 +11,8 @@ func main() {
 
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
 		//AllowOrigins: []string{"http://localhost:3000"},
-		AllowOrigins: []string{"https://front-tsx-frad2spata-uc.a.run.app/"},
+		//AllowOrigins: []string{"https://front-tsx-frad2spata-uc.a.run.app"},
+		AllowOrigins: []string{"*"},
 		AllowMethods: []string{echo.GET, echo.POST, echo.PUT, echo.DELETE},
 	}))
 
