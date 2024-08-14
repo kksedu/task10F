@@ -50,6 +50,6 @@ jobs:
           username: ${{ secrets.MAIL_USERNAME }}
           password: ${{ secrets.MAIL_PASSWORD }}
           subject: Powiadomienie GitHub
-          body: Twoje aplikacje zostały pomyślnie zbudowana!
+          body: Twoje aplikacje zostały pomyślnie zbudowana !
           to: teatrocamillo@gmail.com
           from: GitHub Actions
